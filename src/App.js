@@ -3,6 +3,7 @@ import {useEffect, useState } from 'react'
 import './index.css'
 
 
+
 const App = () => {
   const [chosenLevel , setChosenLevel] = useState(null)
   const [ words, setWords ] = useState(null)
@@ -10,14 +11,18 @@ const App = () => {
   const [clicked, setClicked ] = useState([])
   const [ score, setScore ] = useState(0)
 
-console.log(chosenLevel)
+
+
   useEffect(() => {
     const getRandomWords = () => {
       const options = {
         method: 'GET',
         url: 'https://twinword-word-association-quiz.p.rapidapi.com/type1/',
         params: {level: chosenLevel, area: 'sat'},
-        
+        headers: {
+          'X-RapidAPI-Key': process.env.REACT_APP_API_KEY,
+          'X-RapidAPI-Host': 'twinword-word-association-quiz.p.rapidapi.com'
+        }
       };
       
       axios.request(options).then(function (response) {
@@ -30,7 +35,7 @@ console.log(chosenLevel)
     if (chosenLevel) getRandomWords()
    
   }, [chosenLevel])
-console.log(words)
+
 
   const checkAnswer = (option, chosenOption , correctAnswer) =>{
     
@@ -39,7 +44,7 @@ console.log(words)
         setScore((score)  => score + 1)
     } else{ setScore((score)  => score - 1) }
     setClicked([...clicked, option])
-    console.log(correctAnswers)
+   
   }
   return (
     <div className='App'>
