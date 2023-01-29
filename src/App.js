@@ -15,7 +15,7 @@ console.log(chosenLevel)
     const getRandomWords = () => {
       const options = {
         method: 'GET',
-        url: 'http://localhost:8000/words',
+        url: 'https://twinword-word-association-quiz.p.rapidapi.com/type1/',
         params: {level: chosenLevel, area: 'sat'},
         
       };
