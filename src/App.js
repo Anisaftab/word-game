@@ -94,7 +94,10 @@ const App = () => {
           
         </div>)}
         </div>
-        <button onClick={ () => setChosenLevel(null)}>Go Back</button>
+        
+        
+        <button className="back-button" onClick={ () => setChosenLevel(null)}>Go Back</button> 
+        
       </div>}
     </div>
   );
