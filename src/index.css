@@ -34,6 +34,15 @@
 h1{
   text-align: center;
 }
+
+.score{
+  position: fixed;
+  
+}
+
+p{
+  text-align: center;
+}
 body {
   margin: 1rem;
   font-family: var(--body-font);
@@ -74,7 +83,7 @@ button:disabled{
   background-color: var();
   max-width: 1000px;
   display: grid;
-  gap: 1.5rem;
+  gap: 1rem;
   
   
 }
@@ -96,16 +105,16 @@ button:disabled{
   flex-direction: row;
 }
 
-.qustion-button{
+.question-button{
   display: flex;
   flex-direction: column;
 }
 
 .questions{
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  
+  display: grid;
+  justify-content: center;
+  text-align: center;
+  grid-template-columns: repeat(3, 1fr);
 }
 .back-button{
   max-height: fit-content;

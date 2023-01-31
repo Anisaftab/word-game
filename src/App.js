@@ -37,13 +37,14 @@ const App = () => {
   }, [chosenLevel])
 
 
-  const checkAnswer = (option, chosenOption , correctAnswer) =>{
+  const checkAnswer = (option, chosenOption , correctAnswer, options) =>{
     
-    if( chosenOption === correctAnswer ){
+    if( chosenOption === correctAnswer){
         setCorrectAnswers([...correctAnswers , option  ])
         setScore((score)  => score + 1)
     } else{ setScore((score)  => score - 1) }
     setClicked([...clicked, option])
+    
    
   }
   return (
@@ -72,7 +73,7 @@ const App = () => {
       {chosenLevel && words && <div className="question-area">
         <h1>Welcome to Level: {chosenLevel}</h1>
         <h2>Score Rules: Correct:+1 Incorrect:-1</h2>
-        <h3>Your Score: {score}</h3>
+        <h2 className="score">Your Score: {score}</h2>
         <div className="questions">
         { words.quizlist.map(( question , _questionIndex) => 
         <div key={_questionIndex} className="question-box">
@@ -84,9 +85,10 @@ const App = () => {
               <div key={optionIndex} className="question-button">
                 <button
                   disabled = { clicked.includes(option) } 
-                  onClick={() => checkAnswer( option, optionIndex + 1 , question.correct)}
+                  onClick={() => checkAnswer( option, optionIndex + 1 , question.correct, question.option)}
                 > {option} </button>
-                { correctAnswers.includes(option) && <p>Correct!!</p>}
+                { correctAnswers.includes(option) && <p>Correct!! <br></br>Answer: {option}</p>  }
+                
               </div>
             )
             )}
