@@ -24,6 +24,7 @@ const App = () => {
           'X-RapidAPI-Host': 'twinword-word-association-quiz.p.rapidapi.com'
         }
       };
+  
       
       axios.request(options).then(function (response) {
         setWords(response.data);
@@ -32,18 +33,19 @@ const App = () => {
       });
     }
 
-    if (chosenLevel) getRandomWords()
+    if (chosenLevel) ( getRandomWords() )
    
   }, [chosenLevel])
 
 
-  const checkAnswer = (option, chosenOption , correctAnswer, options) =>{
+  const checkAnswer = (option, chosenOption , correctAnswer) =>{
     
     if( chosenOption === correctAnswer){
         setCorrectAnswers([...correctAnswers , option  ])
-        setScore((score)  => score + 1)
-    } else{ setScore((score)  => score - 1) }
+        setScore((score)  => score = (correctAnswers.length + 1))
+    } else{}
     setClicked([...clicked, option])
+
     
    
   }
@@ -72,8 +74,8 @@ const App = () => {
       </div>}
       {chosenLevel && words && <div className="question-area">
         <h1>Welcome to Level: {chosenLevel}</h1>
-        <h2>Score Rules: Correct:+1 Incorrect:-1</h2>
-        <h2 className="score">Your Score: {score}</h2>
+        <h2>Score Rules: Correct:+1 </h2>
+        <h2 className="score">Your Score: {score} / 10</h2>
         <div className="questions">
         { words.quizlist.map(( question , _questionIndex) => 
         <div key={_questionIndex} className="question-box">
@@ -85,7 +87,7 @@ const App = () => {
               <div key={optionIndex} className="question-button">
                 <button
                   disabled = { clicked.includes(option) } 
-                  onClick={() => checkAnswer( option, optionIndex + 1 , question.correct, question.option)}
+                  onClick={() => checkAnswer( option, optionIndex + 1 , question.correct)}
                 > {option} </button>
                 { correctAnswers.includes(option) && <p>Correct!! <br></br>Answer: {option}</p>  }
                 
@@ -98,7 +100,7 @@ const App = () => {
         </div>
         
         
-        <button className="back-button" onClick={ () => setChosenLevel(null)}>Go Back</button> 
+        <button className="back-button" onClick={ () => setChosenLevel(null) && setCorrectAnswers([])}>Go Back</button> 
         
       </div>}
     </div>
